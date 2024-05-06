@@ -23,6 +23,6 @@
 
 ***Program to Interfaces not Implementations*** The codebase programs to interfaces rather than concrete implementations. For instance, the Reporting class depends on the Warehouse interface, enabling flexibility in implementing different warehouse functionalities.Relevant code: [Reporting.cs - Line 24](./Console/Reporting.cs#L24)
 
-***Fail Fast*** The code follows the fail-fast principle by detecting and reporting errors as soon as they occur. For instance, when attempting to remove a product from the warehouse that is not present, an exception would be thrown.Relevant code: [Warehouse.cs - Line 38](./Console/Warehouse.cs#L106-109)
+***Fail Fast*** The code follows the fail-fast principle by detecting and reporting errors as soon as they occur. For instance, when attempting to remove a product from the warehouse that is not present, an exception would be thrown.Relevant code: [Warehouse.cs - Line 106-109](./Console/Warehouse.cs#L106-109)
 
 *These principles collectively contribute to the code's readability, maintainability, and scalability. Each principle is demonstrated through specific examples within the codebase.*
