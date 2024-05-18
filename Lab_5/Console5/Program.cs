@@ -16,6 +16,7 @@ namespace Console5
             Feature3();
             Feature4();
             Feature5();
+            Feature6();
         }
 
         private static void Feature1()
@@ -116,6 +117,38 @@ namespace Console5
             var elementNode = new LightElementNodeWithVisitor("div", "block", "single", new List<string> { "class1", "class2" }, new List<LightNode> { textNode });
 
             elementNode.Accept(visitor);
+        }
+
+        private static void Feature6()
+        {
+            Console.ForegroundColor = ConsoleColor.Yellow;
+            Console.WriteLine("Feature6:");
+            Console.ResetColor();
+
+            var observer = new ConsoleLoggingObserver();
+
+            var root = new ObservableLightElementNode("div", "", "", new List<string>(), new List<LightNode>
+            {
+                new ObservableLightTextNode("Hello, world!"),
+                new ObservableLightElementNode("span", "", "", new List<string>{"class1"}, new List<LightNode>
+                {
+                    new ObservableLightTextNode("Nested span")
+                })
+            });
+
+            root.AddObserver(observer);
+            foreach (var child in root.ChildNodes)
+            {
+                if (child is ObservableLightNode observableChild)
+                {
+                    observableChild.AddObserver(observer);
+                }
+            }
+
+            var textNode = (ObservableLightTextNode)root.ChildNodes[0];
+            textNode.Text = "Updated Hello, world!";
+
+            Console.WriteLine(root.OuterHTML);
         }
     }
 }
