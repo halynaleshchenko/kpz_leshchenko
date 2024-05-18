@@ -13,6 +13,7 @@ namespace Console5
         {
             Feature1();
             Feature2();
+            Feature3();
         }
 
         private static void Feature1()
@@ -57,6 +58,26 @@ namespace Console5
             var removeChildCommand = new RemoveChildCommand(root, newChild);
             removeChildCommand.Execute();
             removeChildCommand.Undo();
+
+            Console.WriteLine(root.OuterHTML);
+        }
+        private static void Feature3()
+        {
+            Console.ForegroundColor = ConsoleColor.Yellow;
+            Console.WriteLine("Feature3:");
+            Console.ResetColor();
+
+            var root = new LightElementNodeWithState("div", "", "", new List<string>(), new List<LightNode>
+            {
+                new LightTextNode("Hello, world!"),
+                new LightElementNodeWithState("span", "", "", new List<string>{"class1"}, new List<LightNode>
+                {
+                    new LightTextNode("Nested span")
+                })
+            });
+
+            var spanElement = (LightElementNodeWithState)root.ChildNodes[1];
+            spanElement.SetStyleState(new HighlightStyleState());
 
             Console.WriteLine(root.OuterHTML);
         }
