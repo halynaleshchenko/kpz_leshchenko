@@ -6,23 +6,21 @@ using System.Threading.Tasks;
 
 namespace Console5
 {
-    public class LightElementNode : LightNode
+    public class ObservableLightElementNode : ObservableLightNode
     {
         private string tagName;
         private List<string> cssClasses;
         private List<LightNode> children;
 
-
         public List<string> Attributes { get; set; }
 
-        public LightElementNode(string tagName, string displayType, string closingType, List<string> cssClasses, List<LightNode> children)
+        public ObservableLightElementNode(string tagName, string displayType, string closingType, List<string> cssClasses, List<LightNode> children)
         {
             this.tagName = tagName;
             this.cssClasses = cssClasses;
             this.children = children;
-            OnCreated();
+            NotifyObservers();
         }
-
 
         public string TagName => tagName;
         public List<string> ClassList => cssClasses;
@@ -65,11 +63,6 @@ namespace Console5
                 }
                 return innerHtmlBuilder.ToString();
             }
-        }
-
-        public override void OnCreated()
-        {
-            Console.WriteLine($"Element {TagName} created");
         }
     }
 }
