@@ -20,6 +20,7 @@ namespace Console5
             this.tagName = tagName;
             this.cssClasses = cssClasses;
             this.children = children;
+            OnCreated();
         }
 
 
@@ -64,6 +65,11 @@ namespace Console5
                 }
                 return innerHtmlBuilder.ToString();
             }
+        }
+
+        public override void OnCreated()
+        {
+            Console.WriteLine($"Element {TagName} created");
         }
     }
 }
