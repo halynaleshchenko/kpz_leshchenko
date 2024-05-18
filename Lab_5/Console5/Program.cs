@@ -15,6 +15,7 @@ namespace Console5
             Feature2();
             Feature3();
             Feature4();
+            Feature5();
         }
 
         private static void Feature1()
@@ -98,6 +99,23 @@ namespace Console5
             });
 
             Console.WriteLine(root.OuterHTML);
+        }
+        private static void Feature5()
+        {
+
+            Console.ForegroundColor = ConsoleColor.Yellow;
+            Console.WriteLine("Feature5:");
+            Console.ResetColor();
+
+            var visitor = new MyLightNodeVisitor();
+
+            var textNode = new LightTextNodeWithVisitor("Hello, world!");
+
+            textNode.Accept(visitor);
+
+            var elementNode = new LightElementNodeWithVisitor("div", "block", "single", new List<string> { "class1", "class2" }, new List<LightNode> { textNode });
+
+            elementNode.Accept(visitor);
         }
     }
 }
